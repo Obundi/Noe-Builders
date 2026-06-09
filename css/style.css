@@ -134,10 +134,12 @@ h3 { font-size: clamp(20px, 2.5vw, 30px); font-weight: 600; }
 }
 
 .nav-logo-img {
-  width: 36px;
-  height: 36px;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px;
   object-fit: contain;
   filter: brightness(0) invert(1);
+  flex-shrink: 0;
 }
 
 .nav-logo-text {
