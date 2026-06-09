@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — NOE Builders</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+
+    .projects-page { padding: 80px 0 100px; }
+
+    .projects-note {
+      background: #fff;
+      border-left: 3px solid #e07b2a;
+      padding: 16px 24px;
+      margin-bottom: 56px;
+      font-size: 13px;
+      color: #6b6560;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .projects-full-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .project-full-card {
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-full-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    .project-full-card:first-child {
+      grid-column: span 2;
+    }
+
+    .project-full-img {
+      height: 340px;
+      overflow: hidden;
+    }
+
+    .project-full-card:first-child .project-full-img {
+      height: 480px;
+    }
+
+    .project-full-img img {
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .project-full-card:hover .project-full-img img {
+      transform: scale(1.04);
+    }
+
+    .project-full-body {
+      padding: 28px 32px;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-meta span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #e07b2a;
+    }
+
+    .project-meta .project-location {
+      color: #9b9590;
+    }
+
+    .project-full-body h3 {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .project-full-body p {
+      color: #6b6560;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .placeholder-notice {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 11px;
+      color: #b0a99e;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .projects-full-grid { grid-template-columns: 1fr; }
+      .project-full-card:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon"><img src="images/logo.svg" alt="NOE Builders Logo" /></div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">NOE BUILDERS</span>
+          <span class="nav-logo-tagline">Natural Building</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="materials.html">Materials</a></li>
+        <li><a href="academy.html">Noe Academy</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="quote.html" class="btn btn-primary nav-cta">Get a Quote</a></li>
+      </ul>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Our Work</span>
+      <h1>Projects &amp; Collaborations</h1>
+      <p>A selection of hospitality and residential projects that reflect the NOE Builders vision.</p>
+    </div>
+  </div>
+
+  <section class="projects-page">
+    <div class="container">
+
+      <div class="projects-note fade-in">
+        <strong>Note:</strong> These projects represent collaborations and supply partnerships that embody our vision for natural building. Project photos and full descriptions will be updated as confirmed by the client. <span style="color:#e07b2a">[CLIENT TO PROVIDE: confirmed project photos and descriptions]</span>
+      </div>
+
+      <div class="projects-full-grid">
+
+        <div class="project-full-card fade-in">
+          <div class="project-full-img">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1400&q=80" alt="Kizikula" />
+          </div>
+          <div class="project-full-body">
+            <div class="project-meta">
+              <span>Boutique Hospitality</span>
+              <span class="project-location">Africa</span>
+            </div>
+            <h3>Kizikula</h3>
+            <p>A boutique lodge experience built with natural materials throughout — from the structure to the interiors. Every element chosen to integrate seamlessly with the surrounding landscape.</p>
+            <span class="placeholder-notice">[CLIENT TO PROVIDE: full project description and photos]</span>
+          </div>
+        </div>
+
+        <div class="project-full-card fade-in">
+          <div class="project-full-img">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80" alt="Equinox Hotel" />
+          </div>
+          <div class="project-full-body">
+            <div class="project-meta">
+              <span>Luxury Hotel</span>
+              <span class="project-location">New York, USA</span>
+            </div>
+            <h3>Equinox Hotel</h3>
+            <p>High-end hospitality collaboration bringing natural material supply and expertise to one of New York's most ambitious wellness-focused hotel projects.</p>
+            <span class="placeholder-notice">[CLIENT TO PROVIDE: full project description and photos]</span>
+          </div>
+        </div>
+
+        <div class="project-full-card fade-in fade-in-delay-1">
+          <div class="project-full-img">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80" alt="Télla Théra" />
+          </div>
+          <div class="project-full-body">
+            <div class="project-meta">
+              <span>Luxury Resort</span>
+              <span class="project-location">Greece</span>
+            </div>
+            <h3>Télla Théra</h3>
+            <p>Greek luxury hotel featuring natural interiors and material supply — a project deeply connected to the island landscape, warmth of stone, and Mediterranean light.</p>
+            <span class="placeholder-notice">[CLIENT TO PROVIDE: full project description and photos]</span>
+          </div>
+        </div>
+
+        <div class="project-full-card fade-in">
+          <div class="project-full-img">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c4fe1fa7?w=900&q=80" alt="OKKO Hotels" />
+          </div>
+          <div class="project-full-body">
+            <div class="project-meta">
+              <span>Hotel Group</span>
+              <span class="project-location">Europe</span>
+            </div>
+            <h3>OKKO Hotels</h3>
+            <p>Collaboration with OKKO's European hospitality portfolio — supplying natural materials and finishing solutions aligned with their commitment to conscious, quality design.</p>
+            <span class="placeholder-notice">[CLIENT TO PROVIDE: full project description and photos]</span>
+          </div>
+        </div>
+
+        <div class="project-full-card fade-in fade-in-delay-1">
+          <div class="project-full-img">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80" alt="Aman Resort" />
+          </div>
+          <div class="project-full-body">
+            <div class="project-meta">
+              <span>Luxury Resort</span>
+              <span class="project-location">International</span>
+            </div>
+            <h3>Aman</h3>
+            <p>Supply and materials collaboration with one of the world's most respected luxury resort brands — where natural integrity and exceptional quality are non-negotiable.</p>
+            <span class="placeholder-notice">[CLIENT TO PROVIDE: full project description and photos]</span>
+          </div>
+        </div>
+
+        <div class="project-full-card fade-in">
+          <div class="project-full-img">
+            <img src="https://images.unsplash.com/photo-1506059612708-99d6c258160e?w=900&q=80" alt="Olea All Suite Hotel" />
+          </div>
+          <div class="project-full-body">
+            <div class="project-meta">
+              <span>Luxury Hotel</span>
+              <span class="project-location">Greece</span>
+            </div>
+            <h3>Olea All Suite Hotel</h3>
+            <p>A Greek luxury hotel project showcasing the beauty of natural materials in a Mediterranean setting — olive groves, stone, wood, and light working together in perfect balance.</p>
+            <span class="placeholder-notice">[CLIENT TO PROVIDE: full project description and photos]</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy">
+    <div class="container">
+      <div class="philosophy-text">
+        <h2>Have a project in mind?</h2>
+        <p>We'd love to hear about your vision.</p>
+      </div>
+      <a href="quote.html" class="btn btn-dark">Get a Free Quote</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>NOE BUILDERS</h3>
+          <div class="tagline">Natural Building</div>
+          <p>Designing, building, and supplying natural homes and hospitality spaces — in harmony with nature.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="materials.html">Materials</a></li>
+            <li><a href="academy.html">Noe Academy</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#creation">Creation</a></li>
+            <li><a href="services.html#building">Building</a></li>
+            <li><a href="services.html#products">Products</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-contact">
+          <h4>Contact</h4>
+          <p><a href="mailto:james@noebuilders.com">james@noebuilders.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 NOE Builders. All rights reserved.</p>
+        <p>noebuilders.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
