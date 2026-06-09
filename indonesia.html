@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indonesia — NOE Builders</title>
+  <meta name="description" content="In the workshops of Indonesia, NOE Builders transforms rare tropical timber into extraordinary natural building products." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.svg" class="nav-logo-img" alt="NOE Builders" />
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">NOE BUILDERS</span>
+          <span class="nav-logo-tag">Natural Building</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Story</a></li>
+        <li><a href="greece.html">Greece</a></li>
+        <li><a href="indonesia.html" class="active">Indonesia</a></li>
+        <li><a href="suriname.html">Suriname</a></li>
+        <li><a href="contact.html" class="btn btn-primary nav-cta">Contact</a></li>
+      </ul>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="country-hero">
+    <div class="country-hero-img" style="background-image: url('images/projects/FACTORY.jpg');"></div>
+    <div class="country-hero-overlay"></div>
+    <div class="container country-hero-content">
+      <span class="label">02 / Indonesia</span>
+      <h1>Indonesia</h1>
+      <p class="hero-tagline">Where the wood is made.</p>
+      <a href="#story" class="btn btn-ghost btn-arrow">Read the Story</a>
+    </div>
+  </section>
+
+  <!-- ── STORY ── -->
+  <section class="country-story" id="story">
+    <div class="container">
+
+      <div class="story-intro fade-in">
+        <span class="label">The Story</span>
+        <h2>From raw timber to finished craft.</h2>
+        <div class="rule" style="margin:20px auto;"></div>
+        <p>Indonesia is where our relationship with wood comes to life. The country is home to some of the world's most skilled timber craftspeople — men and women who have spent their lives learning to read the grain, feel the weight, and understand the soul of each species.</p>
+        <p>Our workshops in Indonesia produce the flooring, furniture, and structural elements that define a NOE Builders space. Everything is made by hand, using traditional techniques refined over generations, with timber selected for its beauty and durability.</p>
+      </div>
+
+      <!-- Photos row 1 -->
+      <div class="photo-grid-2 fade-in">
+        <div class="wm-wrap">
+          <img src="images/projects/HAPPY.jpg" alt="Craftsman at work, Indonesia" />
+          <span class="wm">Indonesia · Craftsman</span>
+        </div>
+        <div class="wm-wrap">
+          <img src="images/projects/L1050656.jpg" alt="NOE Builders team at timber warehouse" />
+          <span class="wm">Indonesia · Timber warehouse</span>
+        </div>
+        <div class="wm-wrap">
+          <img src="images/projects/WORKSHOP.jpg" alt="Workshop interior, Indonesia" />
+          <span class="wm">Indonesia · Workshop</span>
+        </div>
+      </div>
+
+      <div style="height:80px;"></div>
+
+      <div class="story-intro fade-in">
+        <span class="label">The Craft</span>
+        <h2>Skilled hands. Extraordinary results.</h2>
+        <div class="rule" style="margin:20px auto;"></div>
+        <p>The workshops we partner with in Indonesia are not factories. They are ateliers — places where each piece of timber is handled individually, where the craftsperson knows the species they are working with and respects its character.</p>
+        <p>The result is furniture and flooring that cannot be replicated by a machine. You can see it in the grain, feel it in the finish, and sense it in the weight of the final piece. This is what it means to build with natural materials — to honour the tree that gave its life to become something beautiful and enduring.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── WHAT WE DO ── -->
+  <section class="what-we-do">
+    <div class="container">
+      <span class="label">What We Do in Indonesia</span>
+      <h2>Wood workshops &amp; crafted products.</h2>
+      <div class="do-grid">
+        <div class="do-card fade-in">
+          <div class="do-num">01</div>
+          <h3>Timber Processing</h3>
+          <p>We work with partner workshops to process rare tropical hardwoods into structural elements, cladding, and finishing materials of exceptional quality.</p>
+        </div>
+        <div class="do-card fade-in fd1">
+          <div class="do-num">02</div>
+          <h3>Flooring &amp; Furniture</h3>
+          <p>Our Indonesian workshop partners produce hand-crafted flooring and furniture — minimalist solid wood collections built to last a lifetime and age beautifully.</p>
+        </div>
+        <div class="do-card fade-in fd2">
+          <div class="do-num">03</div>
+          <h3>Quality Selection</h3>
+          <p>We visit the workshops ourselves to select timber and inspect finished products — ensuring every piece that leaves Indonesia meets our standards for beauty and durability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3D MODEL ── -->
+  <section class="model-section">
+    <div class="container">
+      <div class="model-inner">
+        <div class="model-text fade-in">
+          <span class="label">Indonesia · Finished Product</span>
+          <h2>The finished plank.</h2>
+          <div class="rule"></div>
+          <p>This is what emerges from the workshops of Indonesia — a finished timber plank, smooth and considered. The grain tells the story of the tree. The colour deepens with age. The oil finish breathes.</p>
+          <p>Each plank is unique. Each one carries the character of the species it came from and the skill of the hands that worked it. This is what we build with — and what we build for.</p>
+        </div>
+        <div class="model-canvas-wrap fade-in fd1">
+          <canvas id="plank-canvas"></canvas>
+          <div class="model-hint">🖱 Drag to rotate · Switch wood type below</div>
+        </div>
+      </div>
+
+      <!-- Wood selector -->
+      <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:24px;" class="fade-in">
+        <button class="btn btn-dark active-wood" onclick="setWood('teak',this)" style="font-size:10px; padding:8px 18px;">Teak</button>
+        <button class="btn" onclick="setWood('merbau',this)" style="font-size:10px; padding:8px 18px; background:#e0dbd4; color:#4a4540;">Merbau</button>
+        <button class="btn" onclick="setWood('mahogany',this)" style="font-size:10px; padding:8px 18px; background:#e0dbd4; color:#4a4540;">Mahogany</button>
+        <button class="btn" onclick="setWood('suar',this)" style="font-size:10px; padding:8px 18px; background:#e0dbd4; color:#4a4540;">Suar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NEXT COUNTRY ── -->
+  <a href="suriname.html" class="next-country">
+    <img src="images/projects/WIP.jpg" alt="Suriname" />
+    <div class="next-country-overlay"></div>
+    <div class="next-country-content">
+      <span class="label">Next · 03</span>
+      <h2>Suriname</h2>
+      <span class="btn btn-ghost btn-arrow" style="margin:0 auto;">Into the Forest</span>
+    </div>
+  </a>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="name">NOE BUILDERS</div>
+          <span class="tag">Natural Building</span>
+          <p>Designing, building, and supplying natural homes and hospitality spaces — in harmony with nature.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Story</a></li>
+            <li><a href="greece.html">Greece</a></li>
+            <li><a href="indonesia.html">Indonesia</a></li>
+            <li><a href="suriname.html">Suriname</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:james@noebuilders.com">james@noebuilders.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 NOE Builders. All rights reserved.</p>
+        <p>noebuilders.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const s = NOE3D.makeScene('plank-canvas', 0xfaf8f5);
+    if (s) {
+      const { renderer, scene, camera, vel, damp } = s;
+      camera.position.set(0, 1, 4.5);
+
+      const woods = {
+        teak:     { base: 0xb5651d, grain: 0x8b4513 },
+        merbau:   { base: 0x7a3b10, grain: 0x4a2008 },
+        mahogany: { base: 0x8b2e0a, grain: 0x5c1a04 },
+        suar:     { base: 0xc8864e, grain: 0x9a5a28 },
+      };
+
+      const geo = new THREE.BoxGeometry(3.4, 0.16, 0.85, 1, 1, 1);
+      let plank;
+
+      function buildPlank(type) {
+        if (plank) scene.remove(plank);
+        const w = woods[type];
+        const topTex = NOE3D.woodTex(w.base, w.grain, 512, 128);
+        const sideTex = NOE3D.woodTex(w.base, w.grain, 256, 32);
+        const endTex = NOE3D.woodTex(w.base, w.grain, 128, 64);
+        const mats = [
+          new THREE.MeshStandardMaterial({ map: sideTex, roughness: 0.6 }),
+          new THREE.MeshStandardMaterial({ map: sideTex, roughness: 0.6 }),
+          new THREE.MeshStandardMaterial({ map: topTex,  roughness: 0.5 }),
+          new THREE.MeshStandardMaterial({ map: topTex,  roughness: 0.5 }),
+          new THREE.MeshStandardMaterial({ map: endTex,  roughness: 0.7 }),
+          new THREE.MeshStandardMaterial({ map: endTex,  roughness: 0.7 }),
+        ];
+        plank = new THREE.Mesh(geo, mats);
+        plank.rotation.x = 0.2; plank.rotation.y = 0.4;
+        scene.add(plank);
+      }
+
+      buildPlank('teak');
+
+      window.setWood = function(type, btn) {
+        buildPlank(type);
+        document.querySelectorAll('.active-wood').forEach(b => {
+          b.classList.remove('active-wood');
+          b.style.background = '#e0dbd4'; b.style.color = '#4a4540';
+        });
+        btn.classList.add('active-wood');
+        btn.style.background = '#1a2e44'; btn.style.color = '#fff';
+      };
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const v = vel();
+        plank.rotation.y += v.y + 0.004;
+        plank.rotation.x += v.x;
+        damp();
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+  </script>
+</body>
+</html>
