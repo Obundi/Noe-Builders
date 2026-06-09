@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materials — NOE Builders</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+
+    /* Natural Materials Grid */
+    .materials-section { padding: 80px 0; }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      background: #d4cfc8;
+      margin-top: 56px;
+    }
+
+    .material-card {
+      background: #f0ece4;
+      padding: 36px 32px;
+      transition: background 0.3s;
+    }
+
+    .material-card:hover { background: #fff; }
+
+    .material-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .material-card h3 { font-size: 22px; margin-bottom: 8px; }
+    .material-card p { font-size: 14px; color: #6b6560; line-height: 1.8; }
+
+    .material-benefit {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #e07b2a;
+    }
+
+    /* Wood Table */
+    .wood-section {
+      padding: 80px 0;
+      background: #fff;
+    }
+
+    .wood-table-wrapper {
+      overflow-x: auto;
+      margin-top: 48px;
+      border-radius: 2px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+
+    .wood-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .wood-table thead {
+      background: #1a2e44;
+      color: #fff;
+    }
+
+    .wood-table th {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .wood-table tbody tr {
+      border-bottom: 1px solid #e8e2d8;
+      background: #faf8f5;
+      transition: background 0.2s;
+    }
+
+    .wood-table tbody tr:hover { background: #fff; }
+
+    .wood-table td {
+      padding: 16px 20px;
+      color: #4a4540;
+      vertical-align: middle;
+    }
+
+    .wood-table td:first-child {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #1a2e44;
+      font-size: 15px;
+    }
+
+    .durability-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .class-1 { background: #e8f5e9; color: #2e7d32; }
+    .class-1-2 { background: #f1f8e9; color: #558b2f; }
+    .class-2 { background: #fff8e1; color: #f57f17; }
+    .class-2-3 { background: #fff3e0; color: #e65100; }
+    .class-3 { background: #fce4ec; color: #c62828; }
+    .class-3-4 { background: #fce4ec; color: #b71c1c; }
+
+    .durability-guide {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .durability-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #6b6560;
+    }
+
+    /* ── 3D Plank Section ── */
+    .plank-section {
+      padding: 100px 0;
+      background: #1a2e44;
+      text-align: center;
+    }
+
+    .plank-section .section-label { color: #e07b2a; }
+    .plank-section h2 { color: #fff; margin-bottom: 12px; }
+    .plank-section > .container > p { color: rgba(255,255,255,0.6); margin-bottom: 48px; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+    #plank-canvas {
+      display: block;
+      margin: 0 auto;
+      cursor: grab;
+      border-radius: 4px;
+    }
+
+    #plank-canvas:active { cursor: grabbing; }
+
+    .plank-hint {
+      margin-top: 16px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .wood-selector {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .wood-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      padding: 8px 18px;
+      border-radius: 2px;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .wood-btn:hover, .wood-btn.active {
+      background: #e07b2a;
+      border-color: #e07b2a;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon"><img src="images/logo.svg" alt="NOE Builders Logo" /></div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">NOE BUILDERS</span>
+          <span class="nav-logo-tagline">Natural Building</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="materials.html">Materials</a></li>
+        <li><a href="academy.html">Noe Academy</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="quote.html" class="btn btn-primary nav-cta">Get a Quote</a></li>
+      </ul>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">What We Build With</span>
+      <h1>Natural Materials</h1>
+      <p>Every material we use is chosen for its health benefits, environmental integrity, and enduring beauty.</p>
+    </div>
+  </div>
+
+  <!-- Natural Materials -->
+  <section class="materials-section">
+    <div class="container">
+      <div class="section-header fade-in" style="text-align:left; max-width:100%; margin-bottom:0;">
+        <span class="section-label">Our Materials</span>
+        <h2>Built from the earth,<br>returned to nature.</h2>
+        <div class="divider"></div>
+        <p style="max-width:600px">We build exclusively with materials that breathe, age gracefully, and contribute to the health of the people who live and work within them.</p>
+      </div>
+
+      <div class="materials-grid">
+        <div class="material-card fade-in">
+          <div class="material-icon">🌲</div>
+          <h3>Wood</h3>
+          <p>The undisputed king of natural building materials. Carefully selected timber reduces stress, lowers heart rates, and creates a deep biophilic connection to nature.</p>
+          <span class="material-benefit">Stress reduction · Acoustic benefits · Biophilic connection</span>
+        </div>
+        <div class="material-card fade-in fade-in-delay-1">
+          <div class="material-icon">🌿</div>
+          <h3>Hemp</h3>
+          <p>Non-toxic, breathable, and anti-fungal. Hemp insulation and construction actively improves indoor air quality while sequestering carbon throughout its lifetime.</p>
+          <span class="material-benefit">Non-toxic · Breathable · Anti-fungal · Air quality</span>
+        </div>
+        <div class="material-card fade-in fade-in-delay-2">
+          <div class="material-icon">🐑</div>
+          <h3>Wool</h3>
+          <p>Nature's perfect insulator. Wool absorbs odours and sound, regulates humidity naturally, and keeps spaces warm in winter and cool in summer — without chemicals.</p>
+          <span class="material-benefit">Humidity regulation · Sound absorption · Odour control</span>
+        </div>
+        <div class="material-card fade-in">
+          <div class="material-icon">🔶</div>
+          <h3>Copper</h3>
+          <p>Anti-microbial and timeless. Copper brings vitality to a space and develops a beautiful patina over time — a living reminder of temporality and honest craftsmanship.</p>
+          <span class="material-benefit">Anti-microbial · Timeless · Living finish</span>
+        </div>
+        <div class="material-card fade-in fade-in-delay-1">
+          <div class="material-icon">🪨</div>
+          <h3>Chalk / Lime</h3>
+          <p>High pH and naturally breathable, lime creates a living environment. Flexible and self-healing, lime plaster has been used for thousands of years for good reason.</p>
+          <span class="material-benefit">Breathable · Flexible · Natural living environment</span>
+        </div>
+        <div class="material-card fade-in fade-in-delay-2">
+          <div class="material-icon">🏺</div>
+          <h3>Cob</h3>
+          <p>Earth, sand, and straw combined into one of the oldest building materials on earth. Naturally breathing and thermally comfortable — cob creates beautifully warm, durable walls.</p>
+          <span class="material-benefit">Thermal mass · Breathing walls · Thermal comfort</span>
+        </div>
+        <div class="material-card fade-in">
+          <div class="material-icon">🎋</div>
+          <h3>Bamboo</h3>
+          <p>One of the fastest-growing plants on earth, bamboo is renewable, strong, and beautiful. It creates a biophilic connection while leaving a minimal environmental footprint.</p>
+          <span class="material-benefit">Rapid regeneration · Strong · Biophilic</span>
+        </div>
+        <div class="material-card fade-in fade-in-delay-1">
+          <div class="material-icon">🌍</div>
+          <h3>Earth</h3>
+          <p>Rammed earth, adobe, and earthen plasters — building with the ground itself. Earth construction is amongst the most thermally efficient and naturally beautiful methods known.</p>
+          <span class="material-benefit">Thermal mass · Zero waste · Timeless</span>
+        </div>
+        <div class="material-card fade-in fade-in-delay-2">
+          <div class="material-icon">🪨</div>
+          <h3>Stone</h3>
+          <p>Enduring, honest, and beautiful. Stone carries the history of the landscape it comes from, creating spaces with a sense of permanence and deep connection to place.</p>
+          <span class="material-benefit">Durability · Thermal mass · Timeless</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wood Selection Table -->
+  <section class="wood-section">
+    <div class="container">
+      <div class="section-header fade-in" style="text-align:left; max-width:100%; margin-bottom:0;">
+        <span class="section-label">Wood Dossier</span>
+        <h2>Expert wood selection</h2>
+        <div class="divider"></div>
+        <p style="max-width:620px">We have deep expertise in timber selection. Every wood species we use is chosen with precision — matching density, durability, and character to the exact demands of your project.</p>
+      </div>
+
+      <div class="wood-table-wrapper fade-in">
+        <table class="wood-table">
+          <thead>
+            <tr>
+              <th>Wood Species</th>
+              <th>Density (kg/m³)</th>
+              <th>Durability Class</th>
+              <th>Best Uses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ulin / Ironwood</td>
+              <td>850 – 1100</td>
+              <td><span class="durability-badge class-1">Class I</span></td>
+              <td>Bridges, roofing, decking</td>
+            </tr>
+            <tr>
+              <td>Bengkirai</td>
+              <td>880 – 990</td>
+              <td><span class="durability-badge class-2">Class II</span></td>
+              <td>Framework, terraces, pillars</td>
+            </tr>
+            <tr>
+              <td>Merbau</td>
+              <td>800 – 900</td>
+              <td><span class="durability-badge class-1-2">Class I – II</span></td>
+              <td>Flooring, structural elements</td>
+            </tr>
+            <tr>
+              <td>Teak</td>
+              <td>650 – 700</td>
+              <td><span class="durability-badge class-1-2">Class I – II</span></td>
+              <td>Furniture, boats, outdoor use</td>
+            </tr>
+            <tr>
+              <td>Acacia</td>
+              <td>600 – 800</td>
+              <td><span class="durability-badge class-2-3">Class II – III</span></td>
+              <td>Furniture, interior cladding</td>
+            </tr>
+            <tr>
+              <td>Suar</td>
+              <td>550 – 750</td>
+              <td><span class="durability-badge class-3">Class III</span></td>
+              <td>Tables, statement furniture</td>
+            </tr>
+            <tr>
+              <td>Bamboo</td>
+              <td>350 – 700</td>
+              <td><span class="durability-badge class-3-4">Class III – IV</span></td>
+              <td>Light structures, decorative</td>
+            </tr>
+            <tr>
+              <td>Mahogany</td>
+              <td>500 – 650</td>
+              <td><span class="durability-badge class-3">Class III</span></td>
+              <td>High-end interior furniture</td>
+            </tr>
+            <tr>
+              <td>Hinoki</td>
+              <td>400 – 450</td>
+              <td><span class="durability-badge class-2-3">Class II – III</span></td>
+              <td>Premium interiors, wellness</td>
+            </tr>
+            <tr>
+              <td>Pine</td>
+              <td>550 – 700</td>
+              <td><span class="durability-badge class-3-4">Class III – IV</span></td>
+              <td>Light-frame, modular systems</td>
+            </tr>
+            <tr>
+              <td>Wallaba</td>
+              <td>850 – 1050</td>
+              <td><span class="durability-badge class-1-2">Class I – II</span></td>
+              <td>Exterior shingles, facades</td>
+            </tr>
+            <tr>
+              <td>Basralocus</td>
+              <td>720 – 900</td>
+              <td><span class="durability-badge class-2">Class II</span></td>
+              <td>Exterior, decking, bridges</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="durability-guide fade-in">
+        <div class="durability-item"><span class="durability-badge class-1">Class I</span> Very durable — outdoor &amp; marine use</div>
+        <div class="durability-item"><span class="durability-badge class-2">Class II</span> Durable — outdoor use</div>
+        <div class="durability-item"><span class="durability-badge class-3">Class III</span> Moderately durable — indoor / sheltered</div>
+        <div class="durability-item"><span class="durability-badge class-3-4">Class IV</span> Low durability — indoor only</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       3D MODELS SHOWCASE
+  ══════════════════════════════════════════ -->
+  <section style="padding:100px 0; background:#f0ece4;">
+    <div class="container">
+      <div class="section-header fade-in" style="margin-bottom:56px;">
+        <span class="section-label">Explore in 3D</span>
+        <h2>From forest to finished form</h2>
+        <div class="divider"></div>
+        <p>Three moments in the life of natural timber — drag to rotate each one.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+
+        <!-- Model 1: Single Log -->
+        <div style="background:#fff; border-radius:2px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+          <canvas id="log-canvas" style="display:block; width:100%; cursor:grab;"></canvas>
+          <div style="padding:20px 24px;">
+            <div style="font-size:11px; color:#e07b2a; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;">Suriname · Forest</div>
+            <h3 style="font-size:18px; margin-bottom:6px;">The Raw Log</h3>
+            <p style="font-size:13px; color:#6b6560;">A single timber log — the starting point of every natural build.</p>
+          </div>
+        </div>
+
+        <!-- Model 2: Log Pile -->
+        <div style="background:#fff; border-radius:2px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+          <canvas id="logpile-canvas" style="display:block; width:100%; cursor:grab;"></canvas>
+          <div style="padding:20px 24px;">
+            <div style="font-size:11px; color:#e07b2a; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;">Suriname · Harvest</div>
+            <h3 style="font-size:18px; margin-bottom:6px;">The Log Pile</h3>
+            <p style="font-size:13px; color:#6b6560;">Responsibly harvested timber, ready for processing and transport.</p>
+          </div>
+        </div>
+
+        <!-- Model 3: Timber Stack -->
+        <div style="background:#fff; border-radius:2px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+          <canvas id="stack-canvas" style="display:block; width:100%; cursor:grab;"></canvas>
+          <div style="padding:20px 24px;">
+            <div style="font-size:11px; color:#e07b2a; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;">Indonesia · Warehouse</div>
+            <h3 style="font-size:18px; margin-bottom:6px;">The Timber Stack</h3>
+            <p style="font-size:13px; color:#6b6560;">Processed planks at the warehouse — sorted, dried, and ready to build with.</p>
+          </div>
+        </div>
+
+      </div>
+      <p style="text-align:center; margin-top:16px; font-size:11px; color:#b0a99e; letter-spacing:1.5px; text-transform:uppercase;">🖱 Drag to rotate · Scroll to zoom</p>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+  // ── Shared wood texture generator ──
+  function makeWoodTex(baseColor, grainColor, w, h) {
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    const r0=(baseColor>>16)&0xff, g0=(baseColor>>8)&0xff, b0=baseColor&0xff;
+    ctx.fillStyle = `rgb(${r0},${g0},${b0})`;
+    ctx.fillRect(0,0,w,h);
+    const rg=(grainColor>>16)&0xff, gg=(grainColor>>8)&0xff, bg=grainColor&0xff;
+    for(let i=0;i<60;i++){
+      const y=Math.random()*h;
+      ctx.strokeStyle=`rgba(${rg},${gg},${bg},${0.25+Math.random()*0.4})`;
+      ctx.lineWidth=0.5+Math.random()*1.5;
+      ctx.beginPath(); ctx.moveTo(0,y);
+      for(let x=0;x<w;x+=10) ctx.lineTo(x,y+Math.sin(x*0.04)*2.5);
+      ctx.stroke();
+    }
+    const id=ctx.getImageData(0,0,w,h);
+    for(let i=0;i<id.data.length;i+=4){
+      const n=(Math.random()-0.5)*10;
+      id.data[i]=Math.min(255,Math.max(0,id.data[i]+n));
+      id.data[i+1]=Math.min(255,Math.max(0,id.data[i+1]+n));
+      id.data[i+2]=Math.min(255,Math.max(0,id.data[i+2]+n));
+    }
+    ctx.putImageData(id,0,0);
+    return new THREE.CanvasTexture(c);
+  }
+
+  function makeBarkTex() {
+    const c = document.createElement('canvas');
+    c.width=256; c.height=256;
+    const ctx=c.getContext('2d');
+    ctx.fillStyle='#5c3a1e'; ctx.fillRect(0,0,256,256);
+    for(let i=0;i<120;i++){
+      const x=Math.random()*256, y=Math.random()*256;
+      const len=20+Math.random()*40;
+      ctx.strokeStyle=`rgba(30,15,5,${0.3+Math.random()*0.5})`;
+      ctx.lineWidth=1+Math.random()*2;
+      ctx.beginPath(); ctx.moveTo(x,y);
+      ctx.lineTo(x+(Math.random()-0.5)*10, y+len);
+      ctx.stroke();
+    }
+    const id=ctx.getImageData(0,0,256,256);
+    for(let i=0;i<id.data.length;i+=4){
+      const n=(Math.random()-0.5)*15;
+      id.data[i]=Math.min(255,Math.max(0,id.data[i]+n));
+      id.data[i+1]=Math.min(255,Math.max(0,id.data[i+1]+n));
+      id.data[i+2]=Math.min(255,Math.max(0,id.data[i+2]+n));
+    }
+    ctx.putImageData(id,0,0);
+    return new THREE.CanvasTexture(c);
+  }
+
+  // ── Generic scene factory ──
+  function makeScene(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    const w = canvas.parentElement.clientWidth;
+    const h = Math.round(w * 0.75);
+    canvas.width = w; canvas.height = h;
+    canvas.style.height = h + 'px';
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(w, h);
+    renderer.shadowMap.enabled = true;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xfaf8f5);
+
+    const camera = new THREE.PerspectiveCamera(42, w/h, 0.1, 100);
+    camera.position.set(0, 1.2, 5);
+    camera.lookAt(0,0,0);
+
+    scene.add(new THREE.AmbientLight(0xfff5e0, 0.7));
+    const key = new THREE.DirectionalLight(0xfff0d0, 1.3);
+    key.position.set(3,4,3); key.castShadow=true; scene.add(key);
+    const fill = new THREE.DirectionalLight(0xe07b2a, 0.2);
+    fill.position.set(-3,1,-2); scene.add(fill);
+
+    let isDrag=false, prevX=0, prevY=0, velX=0, velY=0;
+    canvas.addEventListener('mousedown', e=>{isDrag=true;prevX=e.clientX;prevY=e.clientY;});
+    window.addEventListener('mouseup', ()=>isDrag=false);
+    window.addEventListener('mousemove', e=>{
+      if(!isDrag)return;
+      velY=(e.clientX-prevX)*0.015; velX=(e.clientY-prevY)*0.01;
+      prevX=e.clientX; prevY=e.clientY;
+    });
+    canvas.addEventListener('touchstart', e=>{isDrag=true;prevX=e.touches[0].clientX;prevY=e.touches[0].clientY;});
+    window.addEventListener('touchend', ()=>isDrag=false);
+    window.addEventListener('touchmove', e=>{
+      if(!isDrag)return;
+      velY=(e.touches[0].clientX-prevX)*0.015; velX=(e.touches[0].clientY-prevY)*0.01;
+      prevX=e.touches[0].clientX; prevY=e.touches[0].clientY;
+    });
+    canvas.addEventListener('wheel', e=>{
+      camera.position.z=Math.min(9,Math.max(2.5,camera.position.z+e.deltaY*0.005));
+      e.preventDefault();
+    },{passive:false});
+
+    return { renderer, scene, camera, vel:()=>({x:velX,y:velY}), damp:()=>{velX*=0.88;velY*=0.88;} };
+  }
+
+  // ═══════════════════════════
+  // MODEL 1: Single Log
+  // ═══════════════════════════
+  (function(){
+    const {renderer,scene,camera,vel,damp} = makeScene('log-canvas');
+    const barkTex = makeBarkTex();
+    barkTex.wrapS=barkTex.wrapT=THREE.RepeatWrapping;
+    barkTex.repeat.set(4,1);
+    const endTex = makeWoodTex(0x8b4513, 0x5c2e00, 128, 128);
+
+    const geo = new THREE.CylinderGeometry(0.5, 0.52, 3.2, 24);
+    const mats = [
+      new THREE.MeshStandardMaterial({map:barkTex, roughness:0.9, metalness:0}),
+      new THREE.MeshStandardMaterial({map:endTex, roughness:0.7}),
+      new THREE.MeshStandardMaterial({map:endTex, roughness:0.7}),
+    ];
+    const log = new THREE.Mesh(geo, mats);
+    log.rotation.z = Math.PI/2;
+    log.rotation.y = 0.3;
+    log.castShadow = true;
+    scene.add(log);
+
+    // Small branch stump
+    const branchGeo = new THREE.CylinderGeometry(0.08,0.1,0.3,8);
+    const branch = new THREE.Mesh(branchGeo, new THREE.MeshStandardMaterial({map:barkTex,roughness:0.9}));
+    branch.position.set(0.3,0.5,0); branch.rotation.z=0.4;
+    log.add(branch);
+
+    function animate(){
+      requestAnimationFrame(animate);
+      const v=vel();
+      log.rotation.y+=v.y; log.rotation.x+=v.x; damp();
+      log.rotation.y+=0.004;
+      renderer.render(scene,camera);
+    }
+    animate();
+  })();
+
+  // ═══════════════════════════
+  // MODEL 2: Log Pile
+  // ═══════════════════════════
+  (function(){
+    const {renderer,scene,camera,vel,damp} = makeScene('logpile-canvas');
+    camera.position.set(0,2,5.5);
+
+    const barkTex = makeBarkTex();
+    barkTex.wrapS=barkTex.wrapT=THREE.RepeatWrapping;
+    barkTex.repeat.set(3,1);
+    const endTex = makeWoodTex(0x7a3b10, 0x4a2008, 128,128);
+
+    const group = new THREE.Group();
+    const logDefs = [
+      {r:0.38, len:3.0, x:-0.1, y:-0.38, z:0,    ry:0.1},
+      {r:0.35, len:2.8, x: 0.05,y:-0.38, z:0.72,  ry:-0.05},
+      {r:0.40, len:3.1, x:-0.2, y:-0.38, z:-0.72, ry:0.08},
+      {r:0.33, len:2.6, x: 0.5, y: 0.33, z:0.35,  ry:0.15},
+      {r:0.36, len:2.9, x:-0.4, y: 0.35, z:-0.3,  ry:-0.1},
+      {r:0.30, len:2.4, x: 0.1, y: 1.02, z:0,     ry:0.05},
+    ];
+    logDefs.forEach(d=>{
+      const geo=new THREE.CylinderGeometry(d.r,d.r*1.02,d.len,20);
+      const mesh=new THREE.Mesh(geo,[
+        new THREE.MeshStandardMaterial({map:barkTex,roughness:0.9}),
+        new THREE.MeshStandardMaterial({map:endTex,roughness:0.7}),
+        new THREE.MeshStandardMaterial({map:endTex,roughness:0.7}),
+      ]);
+      mesh.rotation.z=Math.PI/2; mesh.rotation.y=d.ry;
+      mesh.position.set(d.x,d.y,d.z);
+      mesh.castShadow=true;
+      group.add(mesh);
+    });
+    scene.add(group);
+
+    function animate(){
+      requestAnimationFrame(animate);
+      const v=vel();
+      group.rotation.y+=v.y; group.rotation.x+=v.x; damp();
+      group.rotation.y+=0.003;
+      renderer.render(scene,camera);
+    }
+    animate();
+  })();
+
+  // ═══════════════════════════
+  // MODEL 3: Timber Stack
+  // ═══════════════════════════
+  (function(){
+    const {renderer,scene,camera,vel,damp} = makeScene('stack-canvas');
+    camera.position.set(0,1.5,5.5);
+
+    const woodColors = [
+      {base:0xb5651d, grain:0x8b4513},
+      {base:0xa0522d, grain:0x7a3b10},
+      {base:0xc8864e, grain:0xa06030},
+      {base:0x8b5a2b, grain:0x6b3a18},
+      {base:0xcd8b4a, grain:0xa06828},
+    ];
+
+    const group = new THREE.Group();
+    const rows = 5, perRow = 4;
+    const pw=0.7, ph=0.12, pd=0.22, gap=0.02;
+
+    for(let row=0;row<rows;row++){
+      const isOdd = row%2===1;
+      const cols = isOdd ? perRow-1 : perRow;
+      const totalW = cols*pw + (cols-1)*gap;
+      const startX = -totalW/2 + pw/2;
+      for(let col=0;col<cols;col++){
+        const c = woodColors[(row+col)%woodColors.length];
+        const tex = makeWoodTex(c.base, c.grain, 256, 64);
+        const geo = new THREE.BoxGeometry(pw, ph, pd);
+        const mat = new THREE.MeshStandardMaterial({map:tex, roughness:0.65});
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.x = startX + col*(pw+gap) + (isOdd?(pw+gap)*0.5:0);
+        mesh.position.y = -rows*ph/2 + row*(ph+gap) + ph/2;
+        mesh.position.z = (Math.random()-0.5)*0.04;
+        mesh.rotation.y = (Math.random()-0.5)*0.03;
+        mesh.castShadow=true;
+        group.add(mesh);
+      }
+    }
+    scene.add(group);
+
+    function animate(){
+      requestAnimationFrame(animate);
+      const v=vel();
+      group.rotation.y+=v.y; group.rotation.x+=v.x; damp();
+      group.rotation.y+=0.003;
+      renderer.render(scene,camera);
+    }
+    animate();
+  })();
+  </script>
+
+  <!-- ══════════════════════════════════════════
+       3D WOODEN PLANK
+  ══════════════════════════════════════════ -->
+  <section class="plank-section">
+    <div class="container">
+      <span class="section-label">Interactive</span>
+      <h2>Feel the wood.</h2>
+      <p>Drag to rotate — explore the grain, texture, and depth of natural timber up close.</p>
+
+      <!-- Wood type selector -->
+      <div class="wood-selector">
+        <button class="wood-btn active" onclick="setWood('teak')">Teak</button>
+        <button class="wood-btn" onclick="setWood('oak')">Oak</button>
+        <button class="wood-btn" onclick="setWood('pine')">Pine</button>
+        <button class="wood-btn" onclick="setWood('walnut')">Walnut</button>
+        <button class="wood-btn" onclick="setWood('mahogany')">Mahogany</button>
+      </div>
+
+      <canvas id="plank-canvas" width="700" height="400"></canvas>
+      <p class="plank-hint">🖱 Drag to rotate · Scroll to zoom</p>
+    </div>
+  </section>
+
+  <script>
+    // ── Scene setup ──
+    const canvas = document.getElementById('plank-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a2e44);
+
+    const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+    camera.position.set(0, 1.2, 4.5);
+    camera.lookAt(0, 0, 0);
+
+    // ── Lighting ──
+    const ambient = new THREE.AmbientLight(0xfff5e0, 0.6);
+    scene.add(ambient);
+
+    const keyLight = new THREE.DirectionalLight(0xfff0d0, 1.4);
+    keyLight.position.set(3, 4, 3);
+    keyLight.castShadow = true;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xe07b2a, 0.25);
+    fillLight.position.set(-3, 1, -2);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    rimLight.position.set(0, -2, -4);
+    scene.add(rimLight);
+
+    // ── Wood color palettes ──
+    const woodTypes = {
+      teak:     { base: 0xb5651d, grain: 0x8b4513, ring: 0xcd853f, dark: 0x6b3410 },
+      oak:      { base: 0xc8a96e, grain: 0xa07840, ring: 0xd4b896, dark: 0x7a5c30 },
+      pine:     { base: 0xe8c87a, grain: 0xc8a050, ring: 0xf0d898, dark: 0xa07838 },
+      walnut:   { base: 0x5c3d1e, grain: 0x3d2510, ring: 0x7a5030, dark: 0x2a1508 },
+      mahogany: { base: 0x8b2e0a, grain: 0x6b1e04, ring: 0xa84020, dark: 0x4a1006 },
+    };
+
+    let currentWood = 'teak';
+
+    // ── Procedural wood texture ──
+    function makeWoodTexture(colors, width = 512, height = 128) {
+      const c = document.createElement('canvas');
+      c.width = width; c.height = height;
+      const ctx = c.getContext('2d');
+
+      // Base colour
+      const r0 = (colors.base >> 16) & 0xff;
+      const g0 = (colors.base >> 8)  & 0xff;
+      const b0 =  colors.base        & 0xff;
+      ctx.fillStyle = `rgb(${r0},${g0},${b0})`;
+      ctx.fillRect(0, 0, width, height);
+
+      // Wood grain lines
+      const rg = (colors.grain >> 16) & 0xff;
+      const gg = (colors.grain >> 8)  & 0xff;
+      const bg =  colors.grain        & 0xff;
+
+      for (let i = 0; i < 80; i++) {
+        const y = Math.random() * height;
+        const yw = 0.5 + Math.random() * 1.5;
+        ctx.strokeStyle = `rgba(${rg},${gg},${bg},${0.3 + Math.random() * 0.4})`;
+        ctx.lineWidth = yw;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        for (let x = 0; x < width; x += 8) {
+          ctx.lineTo(x, y + Math.sin(x * 0.05 + Math.random() * 0.5) * 2);
+        }
+        ctx.stroke();
+      }
+
+      // Annual rings on end grain (right end)
+      const rx = (colors.ring >> 16) & 0xff;
+      const gx = (colors.ring >> 8)  & 0xff;
+      const bx =  colors.ring        & 0xff;
+      const cx2 = width - 64, cy2 = height / 2;
+      for (let r = 4; r < 55; r += 5 + Math.random() * 4) {
+        ctx.strokeStyle = `rgba(${rx},${gx},${bx},0.35)`;
+        ctx.lineWidth = 1 + Math.random();
+        ctx.beginPath();
+        ctx.ellipse(cx2, cy2, r * 1.4, r * 0.55, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // Knot
+      const rd = (colors.dark >> 16) & 0xff;
+      const gd = (colors.dark >> 8)  & 0xff;
+      const bd =  colors.dark        & 0xff;
+      const kx = width * 0.35, ky = height * 0.45;
+      const kg = ctx.createRadialGradient(kx, ky, 0, kx, ky, 18);
+      kg.addColorStop(0,   `rgba(${rd},${gd},${bd},0.9)`);
+      kg.addColorStop(0.4, `rgba(${rd},${gd},${bd},0.5)`);
+      kg.addColorStop(1,   `rgba(${rd},${gd},${bd},0)`);
+      ctx.fillStyle = kg;
+      ctx.beginPath();
+      ctx.ellipse(kx, ky, 18, 12, 0.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Subtle noise
+      const imgData = ctx.getImageData(0, 0, width, height);
+      for (let i = 0; i < imgData.data.length; i += 4) {
+        const n = (Math.random() - 0.5) * 12;
+        imgData.data[i]   = Math.min(255, Math.max(0, imgData.data[i]   + n));
+        imgData.data[i+1] = Math.min(255, Math.max(0, imgData.data[i+1] + n));
+        imgData.data[i+2] = Math.min(255, Math.max(0, imgData.data[i+2] + n));
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      return new THREE.CanvasTexture(c);
+    }
+
+    // ── Plank geometry ──
+    const plankGeo = new THREE.BoxGeometry(3.6, 0.18, 0.9, 1, 1, 1);
+
+    // Bevel the edges slightly using a custom approach
+    function makePlankMaterial(colors) {
+      const topTex   = makeWoodTexture(colors, 512, 128);
+      const sideTex  = makeWoodTexture(colors, 512, 32);
+      const endTex   = makeWoodTexture(colors, 128, 64);
+      topTex.wrapS = topTex.wrapT = THREE.RepeatWrapping;
+      sideTex.wrapS = sideTex.wrapT = THREE.RepeatWrapping;
+
+      return [
+        new THREE.MeshStandardMaterial({ map: sideTex, roughness: 0.65, metalness: 0.0 }), // right
+        new THREE.MeshStandardMaterial({ map: sideTex, roughness: 0.65, metalness: 0.0 }), // left
+        new THREE.MeshStandardMaterial({ map: topTex,  roughness: 0.55, metalness: 0.0 }), // top
+        new THREE.MeshStandardMaterial({ map: topTex,  roughness: 0.55, metalness: 0.0 }), // bottom
+        new THREE.MeshStandardMaterial({ map: endTex,  roughness: 0.7,  metalness: 0.0 }), // front
+        new THREE.MeshStandardMaterial({ map: endTex,  roughness: 0.7,  metalness: 0.0 }), // back
+      ];
+    }
+
+    let plank = new THREE.Mesh(plankGeo, makePlankMaterial(woodTypes.teak));
+    plank.castShadow = true;
+    plank.rotation.x = 0.2;
+    plank.rotation.y = 0.4;
+    scene.add(plank);
+
+    // ── Shadow plane ──
+    const shadowGeo = new THREE.PlaneGeometry(10, 10);
+    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.2 });
+    const shadowPlane = new THREE.Mesh(shadowGeo, shadowMat);
+    shadowPlane.rotation.x = -Math.PI / 2;
+    shadowPlane.position.y = -0.5;
+    shadowPlane.receiveShadow = true;
+    scene.add(shadowPlane);
+
+    // ── Drag to rotate ──
+    let isDragging = false, prevX = 0, prevY = 0;
+    let rotVelX = 0, rotVelY = 0;
+    let autoRotate = true;
+
+    canvas.addEventListener('mousedown', e => { isDragging = true; prevX = e.clientX; prevY = e.clientY; autoRotate = false; });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      rotVelY = (e.clientX - prevX) * 0.012;
+      rotVelX = (e.clientY - prevY) * 0.008;
+      prevX = e.clientX; prevY = e.clientY;
+    });
+
+    canvas.addEventListener('touchstart', e => { isDragging = true; prevX = e.touches[0].clientX; prevY = e.touches[0].clientY; autoRotate = false; });
+    window.addEventListener('touchend', () => { isDragging = false; });
+    window.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      rotVelY = (e.touches[0].clientX - prevX) * 0.012;
+      rotVelX = (e.touches[0].clientY - prevY) * 0.008;
+      prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
+    });
+
+    // Scroll to zoom
+    canvas.addEventListener('wheel', e => {
+      camera.position.z = Math.min(8, Math.max(2.5, camera.position.z + e.deltaY * 0.005));
+      e.preventDefault();
+    }, { passive: false });
+
+    // ── Wood switcher ──
+    window.setWood = function(type) {
+      currentWood = type;
+      scene.remove(plank);
+      plank = new THREE.Mesh(plankGeo, makePlankMaterial(woodTypes[type]));
+      plank.castShadow = true;
+      plank.rotation.x = 0.2;
+      plank.rotation.y = 0.4;
+      scene.add(plank);
+      document.querySelectorAll('.wood-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    };
+
+    // ── Animate ──
+    function animate() {
+      requestAnimationFrame(animate);
+      if (autoRotate) {
+        plank.rotation.y += 0.005;
+      } else {
+        plank.rotation.y += rotVelY;
+        plank.rotation.x += rotVelX;
+        rotVelX *= 0.88;
+        rotVelY *= 0.88;
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Responsive canvas
+    window.addEventListener('resize', () => {
+      const w = Math.min(700, window.innerWidth - 40);
+      renderer.setSize(w, w * 0.57);
+      camera.aspect = w / (w * 0.57);
+      camera.updateProjectionMatrix();
+    });
+    window.dispatchEvent(new Event('resize'));
+  </script>
+
+  <section class="philosophy">
+    <div class="container">
+      <div class="philosophy-text">
+        <h2>Want to discuss materials for your project?</h2>
+        <p>We're happy to guide you through the right choices for your build.</p>
+      </div>
+      <a href="contact.html" class="btn btn-dark">Get in Touch</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>NOE BUILDERS</h3>
+          <div class="tagline">Natural Building</div>
+          <p>Designing, building, and supplying natural homes and hospitality spaces — in harmony with nature.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="materials.html">Materials</a></li>
+            <li><a href="academy.html">Noe Academy</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#creation">Creation</a></li>
+            <li><a href="services.html#building">Building</a></li>
+            <li><a href="services.html#products">Products</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-contact">
+          <h4>Contact</h4>
+          <p><a href="mailto:james@noebuilders.com">james@noebuilders.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 NOE Builders. All rights reserved.</p>
+        <p>noebuilders.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
